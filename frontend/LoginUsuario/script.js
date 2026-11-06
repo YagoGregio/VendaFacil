@@ -1,15 +1,29 @@
-const botaoEntrar = document.getElementById('botaoEntrar');
+const botaoEntrar = document.getElementById("botaoEntrar");
+const campoEmail = document.getElementById("email");
+const campoSenha = document.getElementById("senha");
+const mensagemErro = document.getElementById("mensagemErro");
 
-botaoEntrar.addEventListener("submit", function(event){
-    event.preventDefault();
+botaoEntrar.addEventListener("click", (event) => {
+  event.preventDefault();
 
-    const usuario = document.getElementById("email").value.trim();
-    const senha = document.getElementById("senha").value;
-    const mensagemErro = document.getElementById("mensagemErro");
+  const usuario = campoEmail.value.trim();
+  const senha = campoSenha.value;
 
-    if(usuario === "" && senha === "") {
-        window.location.href = "";
-    } else {
-        mensagemErro.textContent = "Usuario ou senha está incorretos. Tente Novamente"
-    }
+  if (usuario === "" || senha === "") {
+    mensagemErro.textContent = "Preencha todos os campos.";
+    return;
+  }
+
+  if (usuario === "Usuario" && senha === "senai123") {
+    window.location.href ="../menuPrincipal/menuPrincipal.html";
+  } else {
+    mensagemErro.textContent = "Usuário ou senha incorretos. Tente novamente.";
+  }
+});
+
+// Some com a mensagem de erro assim que a pessoa volta a digitar
+[campoEmail, campoSenha].forEach((campo) => {
+  campo.addEventListener("input", () => {
+    mensagemErro.textContent = "";
+  });
 });
